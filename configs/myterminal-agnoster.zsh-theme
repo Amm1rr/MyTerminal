@@ -3,7 +3,7 @@
 # Original agnoster's Theme - https://gist.github.com/3712874
 # A Powerline-inspired theme for ZSH
 # Pixegami: Modified some elements to suit my Python/Git heavy use.
-
+# Am1r:MyTerminal: Modified to runnable on arch.
 
 CURRENT_BG='NONE'
 
@@ -56,7 +56,8 @@ prompt_end() {
 
 # Context: user@hostname (who am I and where am I)
 prompt_context() {
-  prompt_segment 008 010 "%(!.%{%F{yellow}%}.)%n"
+#     prompt_segment 008 010 "%(!.%{%F{yellow}%}.)%n"
+	prompt_segment 024 black "%(!.%{%F{yellow}%}.)%n"
 }
 
 # Git: branch/detached head, dirty status
@@ -76,7 +77,8 @@ prompt_git() {
     if [[ -n $dirty ]]; then
       prompt_segment yellow black
     else
-      prompt_segment 014 002
+#       prompt_segment 014 002
+      prompt_segment 014 228
     fi
 
     if [[ -e "${repo_path}/BISECT_LOG" ]]; then
