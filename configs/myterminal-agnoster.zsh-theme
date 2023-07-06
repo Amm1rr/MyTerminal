@@ -193,6 +193,7 @@ prompt_head() {
   echo "\r %{%F{8}%}[%64<..<%~%<<]"  # Print Dir.
 }
 
+
 ## Main prompt
 build_prompt() {
   RETVAL=$?
@@ -207,4 +208,87 @@ build_prompt() {
   prompt_end
 }
 
+
+################################################################
+# Display the duration the command needed to run.
+prompt_command_execution_time() {
+
+  P9K_COMMAND_DURATION_SECONDS=$(($(date +%s%0N)/1000000))
+  
+  (( $+P9K_COMMAND_DURATION_SECONDS )) || return
+  (( P9K_COMMAND_DURATION_SECONDS >= _POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD )) || return
+
+
+  if (( P9K_COMMAND_DURATION_SECONDS < 60 )); then
+    if (( !_POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION )); then
+      local -i sec=$((P9K_COMMAND_DURATION_SECONDS + 0.5))
+    else
+      local -F sec=$_POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION P9K_COMMAND_DURATION_SECONDS
+    fi
+    local text=${sec}s
+  else
+    local -i d=$((P9K_COMMAND_DURATION_SECONDS + 0.5))
+    if [[ $_POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT == "H:M:S" ]]; then
+      local text=${(l.2..0.)$((d % 60))}
+      if (( d >= 60 )); then
+        text=${(l.2..0.)$((d / 60 % 60))}:$text
+        if (( d >= 3600 )); then
+          text=$((d / 3600)):$text
+        elif (( d >= 360 )); then
+          text=0$((d / 360)):$text
+        fi
+      fi
+    else
+      local text="$((d % 60))s"
+      if (( d >= 60 )); then
+        text="$((d / 60 % 60))m $text"
+        if (( d >= 3600 )); then
+          text="$((d / 3600 % 24))h $text"
+          if (( d >= 86400 )); then
+            text="$((d / 86400))d $text"
+          fi
+        fi
+      fi
+    fi
+  fi
+
+  RPROMPT="%F{208}$text $RPROMPT"
+}
+
 PROMPT='%{%f%b%k%}$(build_prompt) '
+
+function ElapseTimeConfig(){
+  timer=$(($(date +%s%0N)/1000000))
+}
+
+function ElapseTIme(){
+  if [ $timer ]; then
+    local now=$(date +%s%3N)
+    local d_ms=$(($now-$timer))
+    local d_s=$((d_ms / 1000))
+    local ms=$((d_ms % 1000))
+    local s=$((d_s % 60))
+    local m=$(((d_s / 60) % 60))
+    local h=$((d_s / 3600))
+    local clor="208"  # Orange
+    if ((h > 0)); then elapsed=${h}h${m}m
+    elif ((m > 0)); then elapsed=${m}m${s}s
+    elif ((s >= 10)); then elapsed=${s}.$((ms / 100))s
+    elif ((s > 0)); then elapsed=${s}.$((ms / 10))s
+    else
+      elapsed=${ms}ms
+      clor="112"      # Green
+    fi
+
+    export RPROMPT="%F{$clor}${elapsed}%{$reset_color%} %F{white}%T"
+    unset timer
+  fi
+}
+
+function preexec() {
+  ElapseTimeConfig
+}
+
+function precmd() {
+  ElapseTIme
+}
