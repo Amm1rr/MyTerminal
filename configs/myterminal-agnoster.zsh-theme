@@ -270,14 +270,22 @@ function ElapseTIme(){
     local s=$((d_s % 60))
     local m=$(((d_s / 60) % 60))
     local h=$((d_s / 3600))
-    local clor="208"  # Orange
+    local clor="white"
+    if ((s>10)); then
+      clor="red"
+    elif ((s>5)); then
+      clor="208"       # Orange
+    elif ((s>3)); then
+      clor="075"       # Blue
+    else
+      clor="112"       # Green
+    fi
     if ((h > 0)); then elapsed=${h}h${m}m
     elif ((m > 0)); then elapsed=${m}m${s}s
     elif ((s >= 10)); then elapsed=${s}.$((ms / 100))s
     elif ((s > 0)); then elapsed=${s}.$((ms / 10))s
     else
       elapsed=${ms}ms
-      clor="112"      # Green
     fi
 
     export RPROMPT="%F{$clor}${elapsed}%{$reset_color%} %F{white}%T"
