@@ -17,6 +17,7 @@ This is my terminal profile for running on Arch (Manjaro KDE), using the default
 - Smart UX
 - Being lightweight is a primary goal
 - The best configuration for working with [Yakuake](https://github.com/KDE/yakuake)
+- Execute Time
 
 
 
