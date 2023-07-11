@@ -62,9 +62,14 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
+  k
+  marker
+  zsh-completions
+  zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
+source "$HOME/.config/MyTerminal/MyTerminal.zsh"
 
 # User configuration
 

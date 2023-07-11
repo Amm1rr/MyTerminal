@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=MyTerminal Yakuake
-Font=Roboto Mono for Powerline,10,-1,5,50,0,0,0,0,0
+Font=MesloLGS NF,10,-1,5,50,0,0,0,0,0
 IgnoreWcWidth=false
 LineSpacing=0
 UseFontLineChararacters=false

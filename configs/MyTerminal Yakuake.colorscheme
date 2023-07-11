@@ -53,13 +53,13 @@ Color=27,102,143
 Color=61,174,233
 
 [Color5]
-Color=155,89,182
+Color=186,152,255
 
 [Color5Faint]
 Color=97,74,115
 
 [Color5Intense]
-Color=142,68,173
+Color=170,170,255
 
 [Color6]
 Color=26,188,156
@@ -94,7 +94,7 @@ Blur=false
 ColorRandomization=false
 Description=MyTerminal Yakuake
 FillStyle=Tile
-Opacity=0.9
+Opacity=0.92
 Wallpaper=
 WallpaperFlipType=NoFlip
 WallpaperOpacity=1

@@ -14,6 +14,7 @@ sudo cp configs/"MyTerminal Yakuake.colorscheme" ~/.oh-my-zsh/themes/"MyTerminal
 sudo cp configs/"MyTerminal Yakuake.profile" ~/.oh-my-zsh/themes/"MyTerminal Yakuake.profile"
 sudo cp configs/MyTerminal.colorscheme ~/.oh-my-zsh/themes/MyTerminal.colorscheme
 sudo cp configs/MyTerminal.profile ~/.oh-my-zsh/themes/MyTerminal.profile
+sudo cp configs/MyTerminal.zsh ~/.config/MyTerminal/MyTerminal.zsh
 
 # Config Yakuake Profile
 if grep -q "DefaultProfile" ~/.config/yakuakerc; then
