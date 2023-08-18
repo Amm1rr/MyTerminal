@@ -1,5 +1,5 @@
 
-[![MyTerminal](./myterminal.jpeg)](./myterminal_screenshot.png)
+[![MyTerminal](./Screenshots/MyTerminal_shot2.jpg)](./Screenshots/MyTerminal_shot2.jpg)
 
 > It's a pork of [Pixegami Terminal Profile](https://github.com/pixegami/terminal-profile) made runnable on Manjaro KDE (an Arch-based distribution).
 For original information on how to run it on Ubuntu and MacOS, please refer to the original repository [pixegami](https://github.com/pixegami/terminal-profile).
