@@ -58,18 +58,21 @@ ZSH_THEME="myterminal-agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
+
 plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  k
-  marker
   zsh-completions
   zsh-history-substring-search
 )
 
+# Ensure fpath includes the custom plugin directory for zsh-completions
+fpath+=("${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src")
+
 source $ZSH/oh-my-zsh.sh
-source "$HOME/.config/MyTerminal/MyTerminal.zsh"
+source "$HOME/.config/MyTerminal.zsh"
 
 # User configuration
 
