@@ -1,5 +1,5 @@
-<a href="./assets/Screenshots/MyTerminal_shot2.jpg">
-  <img src="./assets/Screenshots/MyTerminal_shot2.jpg" alt="MyTerminal" width="400">
+<a href="./assets/Screenshots/MyTerminal_shot1.jpg">
+  <img src="./assets/Screenshots/MyTerminal_shot1.jpg" alt="MyTerminal" width="400">
 </a>
 
 # MyTerminal
