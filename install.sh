@@ -1,6 +1,12 @@
-# Fail on any command.
-set -eux pipefail
+#!/usr/bin/env zsh
 
-sh -c ./install_powerline.sh
-sh -c ./install_terminal.sh
-sh -c ./install_profile.sh
+# Fail on any command and display errors.
+set -euxo pipefail
+
+# Execute individual scripts, requesting sudo permissions once.
+sudo -v # Refresh sudo timestamp to avoid multiple password prompts.
+
+# Run installation scripts.
+sudo ./install_powerline.sh
+sudo ./install_terminal.sh
+sudo ./install_profile.sh
