@@ -1,31 +1,69 @@
+#!/usr/bin/env zsh
+
 # Fail on any command.
-set -eux pipefail
+set -euo pipefail
 
-# Install plug-ins (you can git-pull to update them later).
-(cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting)
-(cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions)
+# Function to clone or update a git repository
+clone_or_update() {
+    local repo_url="$1"
+    local dir_name="$2"
+    if [ -d "$dir_name" ]; then
+        echo "Updating $dir_name..."
+        (cd "$dir_name" && git pull --ff-only)
+    else
+        echo "Cloning $dir_name..."
+        git clone "$repo_url" "$dir_name"
+    fi
+}
 
-# Replace the configs with the saved one.
-sudo cp configs/.zshrc ~/.zshrc
-
-# Copy the modified Agnoster Theme
-sudo cp configs/myterminal-agnoster.zsh-theme ~/.oh-my-zsh/themes/myterminal-agnoster.zsh-theme
-sudo cp configs/"MyTerminal Yakuake.colorscheme" ~/.oh-my-zsh/themes/"MyTerminal Yakuake.colorscheme"
-sudo cp configs/"MyTerminal Yakuake.profile" ~/.oh-my-zsh/themes/"MyTerminal Yakuake.profile"
-sudo cp configs/MyTerminal.colorscheme ~/.oh-my-zsh/themes/MyTerminal.colorscheme
-sudo cp configs/MyTerminal.profile ~/.oh-my-zsh/themes/MyTerminal.profile
-sudo cp configs/MyTerminal.zsh ~/.config/MyTerminal/MyTerminal.zsh
-
-# Config Yakuake Profile
-if grep -q "DefaultProfile" ~/.config/yakuakerc; then
-    sed -i 's/DefaultProfile=.*/DefaultProfile=MyTerminal Yakuake.profile/' ~/.config/yakuakerc
+# Check and install Oh My Zsh if not already installed
+if [[ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
+    echo "Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || {
+        echo "Oh My Zsh installation failed." >&2
+        exit 1
+    }
 else
-    if grep -q "[Desktop Entry]" ~/.config/yakuakerc; then
-        sed -i '/\[Desktop Entry\]/d' ~/.config/yakuakerc
-        sed -i '/\[Desktop Entry\]/a DefaultProfile=MyTerminal Yakuake.profile' ~/.config/yakuakerc
-        sed -i '$a[Desktop Entry]\nDefaultProfile=MyTerminal Yakuake.profile' ~/.config/yakuakerc
+    echo "Oh My Zsh is already installed."
+fi
+
+# Install or update plugins
+PLUGIN_DIR="$HOME/.oh-my-zsh/custom/plugins"
+mkdir -p "$PLUGIN_DIR"
+(
+    cd "$PLUGIN_DIR"
+    clone_or_update https://github.com/zsh-users/zsh-syntax-highlighting zsh-syntax-highlighting
+    clone_or_update https://github.com/zsh-users/zsh-autosuggestions zsh-autosuggestions
+    clone_or_update https://github.com/zsh-users/zsh-completions zsh-completions
+    clone_or_update https://github.com/zsh-users/zsh-history-substring-search zsh-history-substring-search
+)
+
+# Replace the configs with the saved ones
+cp configs/.zshrc "$HOME/.zshrc"
+
+# Copy themes and other configurations
+THEME_DIR="$HOME/.oh-my-zsh/themes"
+mkdir -p "$THEME_DIR"
+cp configs/myterminal-agnoster.zsh-theme "$THEME_DIR/"
+cp configs/"MyTerminal Yakuake.colorscheme" "$THEME_DIR/"
+cp configs/"MyTerminal Yakuake.profile" "$THEME_DIR/"
+cp configs/MyTerminal.colorscheme "$THEME_DIR/"
+cp configs/MyTerminal.profile "$THEME_DIR/"
+cp configs/MyTerminal.zsh "$HOME/.config/"
+
+# Configure Yakuake profile
+if grep -q "DefaultProfile" "$HOME/.config/yakuakerc"; then
+    sed -i 's/DefaultProfile=.*/DefaultProfile=MyTerminal Yakuake.profile/' "$HOME/.config/yakuakerc"
+else
+    if grep -q "\\[Desktop Entry\\]" "$HOME/.config/yakuakerc"; then
+        sed -i '/\\[Desktop Entry\\]/a DefaultProfile=MyTerminal Yakuake.profile' "$HOME/.config/yakuakerc"
+    else
+        echo -e "[Desktop Entry]\\nDefaultProfile=MyTerminal Yakuake.profile" >>"$HOME/.config/yakuakerc"
     fi
 fi
 
-# Switch the shell.
-chsh -s $(which zsh)
+# Switch the shell to ZSH if not already set
+if [[ "$SHELL" != "$(which zsh)" ]]; then
+    echo "Switching the default shell to ZSH..."
+    chsh -s "$(which zsh)" || echo "Failed to change shell. Please run 'chsh -s $(which zsh)' manually."
+fi
