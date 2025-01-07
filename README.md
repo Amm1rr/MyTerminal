@@ -29,7 +29,7 @@ To set up MyTerminal automatically, follow these steps:
 1. Clone the repository and navigate to it:
 
    ```bash
-   git clone https://github.com/Amm1rr/MyTerminal.git && cd MyTerminal
+   git clone https://github.com/amm1rr/MyTerminal-for-Manjaro-KDE.git && cd MyTerminal
    ```
 
 2. Run the installation script:
