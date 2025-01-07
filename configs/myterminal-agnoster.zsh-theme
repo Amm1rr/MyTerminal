@@ -3,7 +3,7 @@
 # Original agnoster's Theme - https://gist.github.com/3712874
 # A Powerline-inspired theme for ZSH
 # Pixegami: Modified some elements to suit my Python/Git heavy use.
-# Am1r:MyTerminal: Modified to runnable on arch.
+# Amm1rr:MyTerminal: Modified to runnable on manjaro kde.
 
 CURRENT_BG='NONE'
 
