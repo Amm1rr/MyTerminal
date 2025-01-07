@@ -1,145 +1,107 @@
+<a href="./assets/Screenshots/MyTerminal_shot2.jpg">
+  <img src="./assets/Screenshots/MyTerminal_shot2.jpg" alt="MyTerminal" width="400">
+</a>
 
-[![MyTerminal](./Screenshots/MyTerminal_shot2.jpg)](./Screenshots/MyTerminal_shot2.jpg)
+# MyTerminal
 
-> It's a pork of [Pixegami Terminal Profile](https://github.com/pixegami/terminal-profile) made runnable on Manjaro KDE (an Arch-based distribution).
-For original information on how to run it on Ubuntu and MacOS, please refer to the original repository [pixegami](https://github.com/pixegami/terminal-profile).
+> A customized terminal profile for [Manjaro KDE](https://manjaro.org/) (Arch-based distribution), inspired by [Pixegami Terminal Profile](https://github.com/pixegami/terminal-profile). For original setup instructions on Ubuntu and macOS, refer to the [Pixegami repository](https://github.com/pixegami/terminal-profile).
 
+---
 
-## MyTerminal
+## Features
 
-This is my terminal profile for running on Arch (Manjaro KDE), using the default terminal app [Konsole](https://github.com/KDE/konsole).
+- **Autocomplete**
+- **Syntax highlighting**
+- **Modern UI**
+- **Optimized UX**
+- **Lightweight design**
+- Fully compatible with [Yakuake](https://github.com/KDE/yakuake)
+- Enhanced performance for quick execution
 
+---
 
-### Features:
-- Autocomplete
-- Syntax highlighting
-- Fresh UI
-- Smart UX
-- Being lightweight is a primary goal
-- The best configuration for working with [Yakuake](https://github.com/KDE/yakuake)
-- Execute Time
+## Installation
 
+### Automatic Installation
 
+To set up MyTerminal automatically, follow these steps:
 
-## Automatic Installation
+1. Clone the repository and navigate to it:
 
-To automatically install MyTerminal, follow these steps:
+   ```bash
+   git clone https://github.com/Amm1rr/MyTerminal.git && cd MyTerminal
+   ```
 
-1. Clone the repository by running the following command in your terminal:
+2. Run the installation script:
+   ```bash
+   ./install.sh
+   ```
 
-    ```bash
-    git clone https://github.com/Amm1rr/MyTerminal.git && cd MyTerminal
-    ```
+Done! Your terminal is now configured with the desired plugins and settings.
 
-2. Once inside the cloned repository, run the installation script with the following command:
+---
 
-    ```bash
-    ./install.sh
-    ```
+### Manual Installation
 
-This script will automatically configure your terminal with the desired plugins and settings.
+#### Prerequisites
 
+Ensure your system has the following dependencies installed:
 
+For Arch-based systems:
 
-
-## Manual Installation
-
-### Prerequisites
-
-For the scripts to work, I think these are the bare minimum requirements.
-
-
-#### Arch:
 ```bash
-# Update your software repositories with pacman.
-sudo pacman -Syu
-
-# Install Git.
-sudo pacman -S git
-
-# Install Vim.
-sudo pacman -S vim
+sudo pacman -Syu  # Update system
+sudo pacman -S git vim zsh curl thefuck
 ```
 
-### Powerline (and fonts)
+#### Install Powerline Fonts
 
-First, we'll install the font (RobotoMono for Powerline). I'll also install it into VIM, since that
-is my built-in editor of choice (but you don't have to use it).
-
-The Powerline fonts also include special characters (like Git branches) that we will use later in
-the terminal profile theme.
+Powerline fonts provide special characters for themes like Git branches. Install the recommended font (RobotoMono for Powerline):
 
 ```bash
 ./install_powerline.sh
 ```
 
-### ZSH, OhMyZSH and Plugins
+#### Set Up Zsh and Plugins
 
-The shell that I use is "ZSH", with the OhMyZSH upgrade on top of that. To install all of that stuff,
-you can run the helper script (and may need to restart after).
+Switch to Zsh and enhance it with Oh My Zsh and plugins:
 
 ```bash
 ./install_terminal.sh
 ```
 
-After this, the terminal should look a bit different, but we need to do the next step to have the
-entire theme.
+#### Configure Terminal Profile
 
-### Profile (plugins, theme, font and color)
-
-This script will first install two plugins that I like to use: auto-complete and color highlighting.
-
-```bash
-# You don't need to execute this - it's part of the script already.
-(cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting)
-(cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions)
-```
-
-It will also copy over the `.zshrc` and `myterminal-agnoster.zsh-theme` files for the
-terminal to use (which will wire up the plugins and the theme).
-
-The last command is to create a terminal profile that will set the colors and also set the font
-to be the Powerline one we installed earlier (required for the theme to display correctly).
+Set up plugins, theme, font, and colors:
 
 ```bash
 ./install_profile.sh
 ```
 
-> You can also change the font to any of the other [Powerline Patched Fonts](https://github.com/powerline/fonts) too if you don't like RobotoMono.
+This includes plugins like syntax highlighting, autosuggestions, and history substring search.
 
-If it looks funky after this command, then you might need to wait until the theme is updated with a
-Powerline font (the next step), and may need to also restart your machine.
+> You can explore other [Powerline Patched Fonts](https://github.com/powerline/fonts) if desired.
 
+---
 
+## Additional Tips
 
-## Notes
+- **Display System Info:** Install [Neofetch](https://github.com/dylanaraps/neofetch) to showcase system details:
+  ```bash
+  sudo pacman -S neofetch
+  neofetch --ascii_colors 6 8
+  ```
+- **Reset to Default Shell:** To revert back to Bash, uninstall Zsh or reset your default shell to Bash.
 
-It is easy to make it runnable on Linux, macOS, or Windows Subsystem.
+---
 
-How to display terminal information like as screenshot (I use [Neofetch](https://github.com/dylanaraps/neofetch)).
+## Resources
 
-```bash
-sudo pacman -S neofetch
-
-# Display the profile
-# I override the colors in this theme
-neofetch --ascii_colors 6 8
-```
-
-
-## How do I reset the changes back to the old terminal?
-
-There's two main modifications being done to the terminal. The terminal theme, and the shell itself.
-
-For the terminal shell itself, we actually installed a new terminal (zsh) alongside the default bash. Bash itself wasn't removed, but we just set the default shell to `zsh`. You can search for how to uninstall zsh and default back to bash.
-
-
-## Sources
-
-Here are some of the main resources I used as part of this terminal setup.
-
-[Oh My Zsh!](https://medium.com/wearetheledger/oh-my-zsh-made-for-cli-lovers-installation-guide-3131ca5491fb) | [Install Powerline](https://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin) | [Agnoster Theme](https://gist.github.com/3712874) | [Pixegami Terminal Profile](https://github.com/pixegami/terminal-profile) | [Yakuake](https://github.com/KDE/yakuake) | [Vazir Code Font - Saber Rastikerdar](http://rastikerdar.blog.ir/)
-
-
+- [Oh My Zsh!](https://medium.com/wearetheledger/oh-my-zsh-made-for-cli-lovers-installation-guide-3131ca5491fb)
+- [Install Powerline](https://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin)
+- [Agnoster Theme](https://gist.github.com/3712874)
+- [Pixegami Terminal Profile](https://github.com/pixegami/terminal-profile)
+- [Yakuake](https://github.com/KDE/yakuake)
+- [Vazir Code Font - Saber Rastikerdar](http://rastikerdar.blog.ir/)
 
 [![](https://visitcount.itsvg.in/api?id=amm1rr&label=Views&color=0&icon=2&pretty=true)](https://github.com/Amm1rr)
