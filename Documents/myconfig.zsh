@@ -1,1 +1,0 @@
-file:///home/amir/.config/ezsh/zshrc/myconfig.zsh
