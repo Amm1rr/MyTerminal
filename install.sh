@@ -7,6 +7,6 @@ set -euxo pipefail
 sudo -v # Refresh sudo timestamp to avoid multiple password prompts.
 
 # Run installation scripts.
-sudo ./install_powerline.sh
-sudo ./install_terminal.sh
-sudo ./install_profile.sh
+sudo ./scripts/install_powerline.sh
+sudo ./scripts/install_terminal.sh
+sudo ./scripts/install_profile.sh
