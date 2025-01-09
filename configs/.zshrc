@@ -66,6 +66,7 @@ plugins=(
   zsh-autosuggestions
   zsh-completions
   zsh-history-substring-search
+  sudo
 )
 
 # Ensure fpath includes the custom plugin directory for zsh-completions
