@@ -169,10 +169,15 @@ prompt_dir() {
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
+  local env_name=""
   if [[ -n $CONDA_PROMPT_MODIFIER ]]; then
-    prompt_segment black default ${CONDA_PROMPT_MODIFIER:1:-2}
+    env_name="${CONDA_PROMPT_MODIFIER:1:-1}"  # Remove parentheses
   elif [[ -n $VIRTUAL_ENV ]]; then
-    prompt_segment black default "$(basename $VIRTUAL_ENV)"
+    env_name="$(basename "$VIRTUAL_ENV")"
+  fi
+
+  if [[ -n $env_name && -z $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
+    prompt_segment blue black "($env_name)"
   fi
 }
 
