@@ -3,7 +3,7 @@
 # Original agnoster's Theme - https://gist.github.com/3712874
 # A Powerline-inspired theme for ZSH
 # Pixegami: Modified some elements to suit my Python/Git heavy use.
-# Amm1rr:MyTerminal: Modified to runnable on manjaro kde.
+# Amm1rr:MyTerminal: Modified to runnable on arch.
 
 CURRENT_BG='NONE'
 
@@ -164,13 +164,15 @@ prompt_hg() {
 
 # Dir: current working directory
 prompt_dir() {
-  # prompt_segment 008 010 $(basename `pwd`) 
+  # prompt_segment 008 010 $(basename `pwd`)
 }
 
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   if [[ -n $CONDA_PROMPT_MODIFIER ]]; then
     prompt_segment black default ${CONDA_PROMPT_MODIFIER:1:-2}
+  elif [[ -n $VIRTUAL_ENV ]]; then
+    prompt_segment black default "$(basename $VIRTUAL_ENV)"
   fi
 }
 
@@ -214,7 +216,7 @@ build_prompt() {
 prompt_command_execution_time() {
 
   P9K_COMMAND_DURATION_SECONDS=$(($(date +%s%0N)/1000000))
-  
+
   (( $+P9K_COMMAND_DURATION_SECONDS )) || return
   (( P9K_COMMAND_DURATION_SECONDS >= _POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD )) || return
 
