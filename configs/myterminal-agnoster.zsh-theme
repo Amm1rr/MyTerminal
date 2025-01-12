@@ -126,6 +126,7 @@ prompt_bzr() {
     fi
 }
 
+# Mercurial (Hg)
 prompt_hg() {
   (( $+commands[hg] )) || return
   local rev status
