@@ -1,6 +1,8 @@
-<a href="./assets/Screenshots/MyTerminal_shot1.jpg">
-  <img src="./assets/Screenshots/MyTerminal_shot1.jpg" alt="MyTerminal" width="400">
-</a>
+<p align="center">
+  <a href="./assets/Screenshots/MyTerminal_shot1.jpg">
+    <img src="./assets/Screenshots/MyTerminal_shot1.jpg" alt="MyTerminal" width="400">
+  </a>
+</p>
 
 # MyTerminal
 
@@ -10,13 +12,30 @@
 
 ## Features
 
-- **Autocomplete**
-- **Syntax highlighting**
-- **Modern UI**
-- **Optimized UX**
-- **Lightweight design**
-- Fully compatible with [Yakuake](https://github.com/KDE/yakuake)
-- Enhanced performance for quick execution
+- **Enhanced Shell Experience**
+
+  - Autocomplete and syntax highlighting
+  - zsh-autosuggestions and zsh-completions
+  - History substring search
+  - Sudo support (double ESC to run last command as SU)
+
+- **Version Control Integration**
+
+  - Git and Mercurial (Hg) support
+
+- **Development Environment**
+
+  - virtualenv, conda, pyenv, and Python environment support
+
+- **User Interface**
+
+  - Modern and lightweight design
+  - Optimized UX for quick execution
+  - Prompt status display (command duration, etc.)
+
+- **Compatibility**
+  - Fully compatible with [Yakuake](https://github.com/KDE/yakuake)
+  - Integration with KDE applets and packages
 
 ---
 
